@@ -1,9 +1,6 @@
-package com.example.jvaccommodationbookingservice.service;
+package com.example.jvaccommodationbookingservice.service.userservice;
 
-import com.example.jvaccommodationbookingservice.dto.userDto.UserLoginRequestDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserLoginResponseDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserRegistrationRequestDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserResponseDto;
+import com.example.jvaccommodationbookingservice.dto.userDto.*;
 import com.example.jvaccommodationbookingservice.exception.EntityNotFoundException;
 import com.example.jvaccommodationbookingservice.exception.RegistrationException;
 import com.example.jvaccommodationbookingservice.mapper.UserMapper;
@@ -11,6 +8,7 @@ import com.example.jvaccommodationbookingservice.model.Role;
 import com.example.jvaccommodationbookingservice.model.User;
 import com.example.jvaccommodationbookingservice.repository.RoleRepository;
 import com.example.jvaccommodationbookingservice.repository.UserRepository;
+import com.example.jvaccommodationbookingservice.service.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -49,7 +47,7 @@ public class UserServiceImpl implements UserService {
         defaultUserRoleSet.add(userRole);
         user.setRoles(defaultUserRoleSet);
         User userSaved = userRepository.save(user);
-        return userMapper.toUserResponse(userSaved);
+        return userMapper.toDto(userSaved);
     }
 
     @Override
@@ -60,6 +58,23 @@ public class UserServiceImpl implements UserService {
         String token = jwtUtil.generateToken(authentication.getName());
         return new UserLoginResponseDto(token);
     }
+
+    @Override
+    public UserResponseDto getProfileData(String email) {
+        return userMapper.toDto(userRepository.findByEmail(email).orElseThrow(()->
+                new EntityNotFoundException("Can't find user by email " + email)));
+    }
+
+    @Override
+    public UserResponseDto updateProfileData(String email, UserUpdateProfileDataRequestDto requestDto) {
+        User user = userRepository.findByEmail(email).orElseThrow(()->
+                new EntityNotFoundException("Can't find user by email " + email));
+        user.setEmail(requestDto.getEmail());
+        user.setFirstName(requestDto.getFirstName());
+        user.setLastName(requestDto.getLastName());
+        return userMapper.toDto(userRepository.save(user));
+    }
+
     public User getAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findByEmail(authentication.getName())

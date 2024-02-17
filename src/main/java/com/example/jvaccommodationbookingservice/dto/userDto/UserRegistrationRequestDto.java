@@ -1,4 +1,4 @@
-package com.example.jvaccommodationbookingservice.dto;
+package com.example.jvaccommodationbookingservice.dto.userDto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

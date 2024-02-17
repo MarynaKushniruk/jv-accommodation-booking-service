@@ -1,2 +1,8 @@
-package com.example.jvaccommodationbookingservice.model;public enum AccommodationType {
+package com.example.jvaccommodationbookingservice.model;
+
+public enum AccommodationType {
+    HOUSE,
+    APARTMENT,
+    CONDO,
+    VACATION_HOME
 }

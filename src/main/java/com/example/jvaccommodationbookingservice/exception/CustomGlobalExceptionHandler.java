@@ -19,37 +19,77 @@ import java.util.Map;
 
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    private Map<String, Object> body;
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
-            HttpHeaders headers,
-            HttpStatusCode status,
-            WebRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
+            final MethodArgumentNotValidException ex,
+            final HttpHeaders headers,
+            final HttpStatusCode status,
+            final WebRequest request
+    ) {
+        body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("status", HttpStatus.BAD_REQUEST);
-        List<String> errors = ex.getBindingResult()
-                .getAllErrors()
-                .stream()
+        List<String> error = ex.getBindingResult().getAllErrors().stream()
                 .map(this::getErrorMessage)
                 .toList();
+        body.put("error", error);
 
         return new ResponseEntity<>(body, headers, status);
+    }
+
+    @ExceptionHandler(DataProcessingException.class)
+    protected ResponseEntity<Object> handleDataProcessingException(DataProcessingException ex) {
+        body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.BAD_REQUEST);
+        body.put("error", ex.getLocalizedMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CardProcessingException.class)
+    protected ResponseEntity<Object> handleCardProcessingException(CardProcessingException ex) {
+        body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.BAD_REQUEST);
+        body.put("error", ex.getLocalizedMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RegistrationException.class)
+    protected ResponseEntity<Object> handleRegistrationException(RegistrationException ex) {
+        body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.CONFLICT);
+        body.put("error", ex.getLocalizedMessage());
+        return new ResponseEntity<>(body, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex) {
+        body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.NOT_FOUND);
+        body.put("error", ex.getLocalizedMessage());
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(TelegramException.class)
+    protected ResponseEntity<Object> handleTelegramException(TelegramException ex) {
+        body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.NOT_FOUND);
+        body.put("error", ex.getLocalizedMessage());
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
     private String getErrorMessage(ObjectError error) {
         if (error instanceof FieldError) {
             String field = ((FieldError) error).getField();
-            String message = error.getDefaultMessage();
-            return field + " " + message;
+            String defaultMessage = error.getDefaultMessage();
+            return field + " " + defaultMessage;
         }
         return error.getDefaultMessage();
-    }
-
-    @ExceptionHandler({RegistrationException.class})
-    public ResponseEntity<Object> registrationException(RegistrationException exception) {
-        return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .body(exception.getMessage());
     }
 }

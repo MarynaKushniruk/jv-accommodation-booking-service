@@ -1,18 +1,20 @@
 package com.example.jvaccommodationbookingservice.controller;
 
-import com.example.jvaccommodationbookingservice.dto.BookingResponseDto;
-import com.example.jvaccommodationbookingservice.dto.CreateBookingRequestDto;
-import com.example.jvaccommodationbookingservice.model.BookingStatus;
-import com.example.jvaccommodationbookingservice.service.BookingService;
+import com.example.jvaccommodationbookingservice.dto.bookingDto.BookingRequestDto;
+import com.example.jvaccommodationbookingservice.dto.bookingDto.BookingResponseDto;
+import com.example.jvaccommodationbookingservice.dto.bookingDto.BookingUpdateRequestDto;
+import com.example.jvaccommodationbookingservice.service.bookingservice.BookingService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Bookings management", description = "Endpoints for bookings action")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/bookings")
@@ -21,36 +23,50 @@ public class BookingController {
 
     @PostMapping
     @Operation(summary = "Create a new booking", description = "Create and save a new booking")
+    @PreAuthorize("hasAnyRole('ROLE_CUSTOMER', 'ROLE_MANAGER')")
     @ResponseStatus(HttpStatus.CREATED)
-    BookingResponseDto create(@RequestBody CreateBookingRequestDto requestDto) {
+    BookingResponseDto create(@RequestBody BookingRequestDto requestDto) {
         return bookingService.create(requestDto);
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority({'ADMIN'})")
-    @Operation(summary = "Get bookings by user_Id and status", description = "Get bookings by user_Id and status")
-    List<BookingResponseDto> searchByIdAndStatus(@PathVariable("user_id") Long id,
-                                                 @PathVariable("status") BookingStatus status) {
-        return bookingService.findByUserIdAndBookingStatus(id, status);
+    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @Operation(summary = "Get booking", description = "Get booking by user id and status")
+    @ResponseStatus(HttpStatus.OK)
+    public List<BookingResponseDto> getAllByUserIdAndStatus(
+            @RequestParam(name = "user_id", required = true) Long userId,
+            @RequestParam(name = "status", required = false) String status,
+            Pageable pageable
+    ) {
+        return bookingService.findByUserIdAndBookingStatus(userId, status, pageable);
     }
+
     @GetMapping("/my")
-    @Operation(summary = "Get all bookings of authenticated user", description = "Get all bookings of user")
-    List<BookingResponseDto> findAll(Authentication authentication) {
-        return bookingService.findAllByUserId(authentication.getName());
+    @PreAuthorize("hasAnyRole('ROLE_CUSTOMER', 'ROLE_MANAGER')")
+    @Operation(summary = "Get all my bookings", description = "Get all user bookings")
+    @ResponseStatus(HttpStatus.OK)
+    public List<BookingResponseDto> getAllMyBookings(Pageable pageable) {
+        return bookingService.findAllMyBookings(pageable);
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get booking by booking id", description = "Get information about booking by id")
-    BookingResponseDto findBookingById(@PathVariable Long id) {
-        return bookingService.getBookingById(id);
+    @PreAuthorize("hasAnyRole('ROLE_CUSTOMER', 'ROLE_MANAGER')")
+    @Operation(summary = "Get booking by id", description = "Get booking by id")
+    @ResponseStatus(HttpStatus.OK)
+    public BookingResponseDto getById(@PathVariable Long id) {
+        return bookingService.getById(id);
     }
-    @PutMapping("/{id}")
-    @Operation(summary = "Update booking by booking id", description = "Update information about booking by id")
-    BookingResponseDto update(@PathVariable Long id, @RequestBody CreateBookingRequestDto requestDto ) {
-        return bookingService.updateBookingById(id, requestDto );
+
+    @PatchMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_CUSTOMER', 'ROLE_MANAGER')")
+    @Operation(summary = "Update by id", description = "Update by id")
+    @ResponseStatus(HttpStatus.OK)
+    public void updateById(@PathVariable Long id, @RequestBody BookingUpdateRequestDto request) {
+        bookingService.updateBookingById(id, request);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_CUSTOMER', 'ROLE_MANAGER')")
     @Operation(summary = "Delete booking by booking id", description = "Delete booking by id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteBookingById(@PathVariable Long id) {

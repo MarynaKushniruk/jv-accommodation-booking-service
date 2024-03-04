@@ -3,6 +3,7 @@ package com.example.jvaccommodationbookingservice.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import jakarta.validation.constraints.NotNull;
@@ -17,6 +18,7 @@ import java.util.*;
 @SQLDelete(sql = "UPDATE users SET is_deleted = true WHERE id=?")
 @Where(clause = "is_deleted=false")
 @Table(name = "users")
+@DynamicUpdate
 @Accessors(chain = true)
 public class User implements UserDetails {
     @Id
@@ -31,21 +33,14 @@ public class User implements UserDetails {
     private String firstName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-        for (Role role : roles) {
-            authorityList.add(new SimpleGrantedAuthority(role.getName().name()));
-        }
-        return authorityList;
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
@@ -76,5 +71,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return !isDeleted;
+    }
+
+    public enum Role {
+        ROLE_MANAGER, ROLE_CUSTOMER
     }
 }

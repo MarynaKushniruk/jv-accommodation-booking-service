@@ -6,14 +6,13 @@ import com.example.jvaccommodationbookingservice.dto.userDto.UserRegistrationReq
 import com.example.jvaccommodationbookingservice.dto.userDto.UserResponseDto;
 import com.example.jvaccommodationbookingservice.exception.RegistrationException;
 import com.example.jvaccommodationbookingservice.service.userservice.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
@@ -25,7 +24,8 @@ public class AuthenticationController {
     private final UserService userService;
 
     @PostMapping(value = "/register", consumes = APPLICATION_JSON_VALUE)
-
+    @Operation(summary = "Register user", description = "Register user")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDto register(@RequestBody @Valid UserRegistrationRequestDto request)
             throws RegistrationException {
         LOGGER.info("Received registration request for user with email: {}", request.getEmail());
@@ -33,6 +33,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "Login user", description = "Login user")
+    @ResponseStatus(HttpStatus.OK)
     public UserLoginResponseDto login(@RequestBody UserLoginRequestDto requestDto) {
         return userService.authenticate(requestDto);
     }

@@ -5,5 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class JvAccommodationBookingServiceApplicationTests {
-
+    @Test
+    void contextLoads() {
+    }
 }

@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-accommodations-table
+      author: root
+      changes:
+        - createTable:
+            tableName: accommodations
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: type
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_accommodations_addresses
+                    referencedTableName: addresses
+                    referencedColumnNames: id
+              - column:
+                  name: size
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: daily_rate
+                  type: DECIMAL(10, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: availability
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_deleted
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+

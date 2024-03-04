@@ -1,6 +1,5 @@
 package com.example.jvaccommodationbookingservice.security;
 
-import com.example.jvaccommodationbookingservice.service.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

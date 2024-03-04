@@ -8,8 +8,7 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -22,15 +21,40 @@ public class Accommodation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
-    private  AccommodationType type;
-    @NotNull
-    private String address;
-    private String size;
-    @Transient
-    private List<String> amenities = new ArrayList<>();
-    @NotNull
+    @Column(unique = true, nullable = false)
+    private Type type;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    private Address address;
+    @Enumerated(EnumType.STRING)
+    @Column(unique = true, nullable = false)
+    private Size size;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "accommodations_amenities",
+            joinColumns = @JoinColumn(name = "accommodation_id"),
+            inverseJoinColumns = @JoinColumn(name = "amenity_id"))
+    private Set<Amenity> amenities;;
+    @Column(name = "daily_rate", nullable = false)
     private BigDecimal dailyRate;
-    private Integer numberOfAvailable;
-    @Column(name = "is_deleted")
+    private Integer availability;;
+    @Column(name = "is_deleted", nullable = false)
     private boolean isDeleted;
+
+    public enum Type {
+        HOUSE,
+        APARTMENT,
+        CONDO,
+        VACATION_HOME,
+        VACATION_APARTMENT,
+        COTTAGE,
+        TOWNHOUSE
+    }
+
+    public enum Size {
+        STUDIO,
+        ONE_BEDROOM,
+        TWO_BEDROOM,
+        THREE_BEDROOM,
+        FOUR_BEDROOM
+    }
 }

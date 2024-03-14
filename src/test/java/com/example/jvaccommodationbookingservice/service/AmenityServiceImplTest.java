@@ -15,7 +15,7 @@ import java.util.Set;
 import com.example.jvaccommodationbookingservice.exception.EntityNotFoundException;
 import com.example.jvaccommodationbookingservice.model.Amenity;
 import com.example.jvaccommodationbookingservice.repository.AmenityRepository;
-import com.example.jvaccommodationbookingservice.service.accommodationservice.amentity.AmenityServiceImpl;
+import com.example.jvaccommodationbookingservice.service.accommodation.amentity.AmenityServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

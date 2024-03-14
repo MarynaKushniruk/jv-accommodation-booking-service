@@ -1,11 +1,11 @@
 package com.example.jvaccommodationbookingservice.controller;
 
-import com.example.jvaccommodationbookingservice.dto.userDto.UserLoginRequestDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserLoginResponseDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserRegistrationRequestDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserResponseDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserLoginRequestDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserLoginResponseDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserRegistrationRequestDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserResponseDto;
 import com.example.jvaccommodationbookingservice.exception.RegistrationException;
-import com.example.jvaccommodationbookingservice.service.userservice.UserService;
+import com.example.jvaccommodationbookingservice.service.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,9 @@
 package com.example.jvaccommodationbookingservice.mapper;
 
 import com.example.jvaccommodationbookingservice.config.MapperConfig;
-import com.example.jvaccommodationbookingservice.dto.accommodationDto.AccommodationFullInfoResponseDto;
-import com.example.jvaccommodationbookingservice.dto.accommodationDto.AccommodationIncompleteInfoResponseDto;
-import com.example.jvaccommodationbookingservice.dto.accommodationDto.AccommodationRequestDto;
+import com.example.jvaccommodationbookingservice.dto.accommodation.AccommodationFullInfoResponseDto;
+import com.example.jvaccommodationbookingservice.dto.accommodation.AccommodationIncompleteInfoResponseDto;
+import com.example.jvaccommodationbookingservice.dto.accommodation.AccommodationRequestDto;
 import com.example.jvaccommodationbookingservice.model.Accommodation;
 import com.example.jvaccommodationbookingservice.model.Address;
 import com.example.jvaccommodationbookingservice.model.Amenity;

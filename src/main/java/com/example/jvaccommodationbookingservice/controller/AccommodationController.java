@@ -1,10 +1,10 @@
 package com.example.jvaccommodationbookingservice.controller;
 
-import com.example.jvaccommodationbookingservice.dto.accommodationDto.AccommodationFullInfoResponseDto;
-import com.example.jvaccommodationbookingservice.dto.accommodationDto.AccommodationIncompleteInfoResponseDto;
-import com.example.jvaccommodationbookingservice.dto.accommodationDto.AccommodationRequestDto;
-import com.example.jvaccommodationbookingservice.dto.accommodationDto.AccommodationUpdateRequestDto;
-import com.example.jvaccommodationbookingservice.service.accommodationservice.AccommodationService;
+import com.example.jvaccommodationbookingservice.dto.accommodation.AccommodationFullInfoResponseDto;
+import com.example.jvaccommodationbookingservice.dto.accommodation.AccommodationIncompleteInfoResponseDto;
+import com.example.jvaccommodationbookingservice.dto.accommodation.AccommodationRequestDto;
+import com.example.jvaccommodationbookingservice.dto.accommodation.AccommodationUpdateRequestDto;
+import com.example.jvaccommodationbookingservice.service.accommodation.AccommodationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

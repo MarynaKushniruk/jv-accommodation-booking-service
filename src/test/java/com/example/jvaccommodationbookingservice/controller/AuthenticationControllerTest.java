@@ -7,9 +7,9 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.example.jvaccommodationbookingservice.dto.userDto.UserLoginRequestDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserRegistrationRequestDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserResponseDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserLoginRequestDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserRegistrationRequestDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserResponseDto;
 import com.example.jvaccommodationbookingservice.exception.EntityNotFoundException;
 import com.example.jvaccommodationbookingservice.security.CustomUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;

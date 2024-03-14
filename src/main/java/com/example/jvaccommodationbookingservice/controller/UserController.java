@@ -1,9 +1,9 @@
 package com.example.jvaccommodationbookingservice.controller;
 
-import com.example.jvaccommodationbookingservice.dto.userDto.UserUpdateProfileInformationDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserUpdateRoleDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserResponseDto;
-import com.example.jvaccommodationbookingservice.service.userservice.UserService;
+import com.example.jvaccommodationbookingservice.dto.user.UserUpdateProfileInformationDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserUpdateRoleDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserResponseDto;
+import com.example.jvaccommodationbookingservice.service.user.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

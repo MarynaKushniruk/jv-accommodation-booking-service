@@ -9,9 +9,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.example.jvaccommodationbookingservice.dto.bookingDto.BookingRequestDto;
-import com.example.jvaccommodationbookingservice.dto.bookingDto.BookingResponseDto;
-import com.example.jvaccommodationbookingservice.dto.bookingDto.BookingUpdateRequestDto;
+import com.example.jvaccommodationbookingservice.dto.booking.BookingRequestDto;
+import com.example.jvaccommodationbookingservice.dto.booking.BookingResponseDto;
+import com.example.jvaccommodationbookingservice.dto.booking.BookingUpdateRequestDto;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.Connection;

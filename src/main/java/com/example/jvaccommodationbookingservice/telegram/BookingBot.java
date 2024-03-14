@@ -4,7 +4,7 @@ import com.example.jvaccommodationbookingservice.controller.AuthenticationContro
 import com.example.jvaccommodationbookingservice.exception.DataProcessingException;
 import com.example.jvaccommodationbookingservice.model.User;
 import com.example.jvaccommodationbookingservice.security.JwtUtil;
-import com.example.jvaccommodationbookingservice.service.userservice.UserService;
+import com.example.jvaccommodationbookingservice.service.user.UserService;
 import com.example.jvaccommodationbookingservice.telegram.model.BotChat;
 import com.example.jvaccommodationbookingservice.telegram.model.Separator;
 import com.example.jvaccommodationbookingservice.telegram.service.TelegramService;

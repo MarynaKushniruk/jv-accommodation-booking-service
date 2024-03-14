@@ -1,11 +1,11 @@
 package com.example.jvaccommodationbookingservice.telegram.service.message.handlers;
 
-import com.example.jvaccommodationbookingservice.dto.userDto.UserUpdateProfileInformationDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserUpdateRoleDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserResponseDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserUpdateProfileInformationDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserUpdateRoleDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserResponseDto;
 import com.example.jvaccommodationbookingservice.exception.TelegramException;
 import com.example.jvaccommodationbookingservice.model.User;
-import com.example.jvaccommodationbookingservice.service.userservice.UserService;
+import com.example.jvaccommodationbookingservice.service.user.UserService;
 import com.example.jvaccommodationbookingservice.telegram.model.Separator;
 import com.example.jvaccommodationbookingservice.telegram.service.message.MessageService;
 import com.fasterxml.jackson.core.JsonProcessingException;

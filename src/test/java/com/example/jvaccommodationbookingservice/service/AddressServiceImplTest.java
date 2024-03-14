@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 import com.example.jvaccommodationbookingservice.exception.EntityNotFoundException;
 import com.example.jvaccommodationbookingservice.model.Address;
 import com.example.jvaccommodationbookingservice.repository.AddressRepository;
-import com.example.jvaccommodationbookingservice.service.accommodationservice.address.AddressServiceImpl;
+import com.example.jvaccommodationbookingservice.service.accommodation.address.AddressServiceImpl;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

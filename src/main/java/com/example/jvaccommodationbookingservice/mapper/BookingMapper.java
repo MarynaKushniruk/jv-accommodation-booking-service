@@ -1,8 +1,8 @@
 package com.example.jvaccommodationbookingservice.mapper;
 
 import com.example.jvaccommodationbookingservice.config.MapperConfig;
-import com.example.jvaccommodationbookingservice.dto.bookingDto.BookingRequestDto;
-import com.example.jvaccommodationbookingservice.dto.bookingDto.BookingResponseDto;
+import com.example.jvaccommodationbookingservice.dto.booking.BookingRequestDto;
+import com.example.jvaccommodationbookingservice.dto.booking.BookingResponseDto;
 import com.example.jvaccommodationbookingservice.model.Booking;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

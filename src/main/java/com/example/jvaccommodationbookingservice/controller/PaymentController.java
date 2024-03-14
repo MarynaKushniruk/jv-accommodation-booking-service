@@ -1,11 +1,11 @@
 package com.example.jvaccommodationbookingservice.controller;
 
 
-import com.example.jvaccommodationbookingservice.dto.paymentDto.PaymentCanceledResponseDto;
-import com.example.jvaccommodationbookingservice.dto.paymentDto.PaymentCreateRequestDto;
-import com.example.jvaccommodationbookingservice.dto.paymentDto.PaymentResponseDto;
-import com.example.jvaccommodationbookingservice.dto.paymentDto.PaymentSuccessResponseDto;
-import com.example.jvaccommodationbookingservice.service.paymentservice.PaymentService;
+import com.example.jvaccommodationbookingservice.dto.payment.PaymentCanceledResponseDto;
+import com.example.jvaccommodationbookingservice.dto.payment.PaymentCreateRequestDto;
+import com.example.jvaccommodationbookingservice.dto.payment.PaymentResponseDto;
+import com.example.jvaccommodationbookingservice.dto.payment.PaymentSuccessResponseDto;
+import com.example.jvaccommodationbookingservice.service.payment.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

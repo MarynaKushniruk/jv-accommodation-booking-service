@@ -11,17 +11,17 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import com.example.jvaccommodationbookingservice.dto.userDto.UserRegistrationRequestDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserResponseDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserUpdateProfileInformationDto;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserUpdateRoleDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserRegistrationRequestDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserResponseDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserUpdateProfileInformationDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserUpdateRoleDto;
 import com.example.jvaccommodationbookingservice.exception.DataProcessingException;
 import com.example.jvaccommodationbookingservice.exception.EntityNotFoundException;
 import com.example.jvaccommodationbookingservice.exception.RegistrationException;
 import com.example.jvaccommodationbookingservice.mapper.UserMapper;
 import com.example.jvaccommodationbookingservice.model.User;
 import com.example.jvaccommodationbookingservice.repository.UserRepository;
-import com.example.jvaccommodationbookingservice.service.userservice.UserServiceImpl;
+import com.example.jvaccommodationbookingservice.service.user.UserServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

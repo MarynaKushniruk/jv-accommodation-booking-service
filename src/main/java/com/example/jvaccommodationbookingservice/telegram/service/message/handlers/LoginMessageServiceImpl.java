@@ -1,7 +1,7 @@
 package com.example.jvaccommodationbookingservice.telegram.service.message.handlers;
 
 import com.example.jvaccommodationbookingservice.controller.AuthenticationController;
-import com.example.jvaccommodationbookingservice.dto.userDto.UserLoginRequestDto;
+import com.example.jvaccommodationbookingservice.dto.user.UserLoginRequestDto;
 import com.example.jvaccommodationbookingservice.model.User;
 import com.example.jvaccommodationbookingservice.telegram.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
